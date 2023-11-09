@@ -18,6 +18,8 @@ import (
 func InitializeAPI(c config.Config) (*api.ServerHTTP, error) {
 	userClient := client.NewUserClient(c)
 	userHandler := handler.NewUserHandler(userClient)
-	serverHTTP := api.NewServerHTTP(userHandler)
+	adminClient := client.NewAdminClient(c)
+	adminHandler := handler.NewAdminHandler(adminClient)
+	serverHTTP := api.NewServerHTTP(userHandler, adminHandler)
 	return serverHTTP, nil
 }

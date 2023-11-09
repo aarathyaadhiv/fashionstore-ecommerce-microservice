@@ -11,6 +11,8 @@ package di
 // func InitializeAPI(c config.Config) (*api.ServerHTTP, error) {
 // 	wire.Build(handler.NewUserHandler,
 // 		api.NewServerHTTP,
-// 		client.NewUserClient)
+// 		client.NewUserClient,
+// 	handler.NewAdminHandler,
+// client.NewAdminClient)
 // 	return &api.ServerHTTP{}, nil
 // }

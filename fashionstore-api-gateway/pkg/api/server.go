@@ -11,7 +11,7 @@ type ServerHTTP struct{
 	engine *gin.Engine
 }
 
-func NewServerHTTP(userHandler *handler.UserHandler)*ServerHTTP{
+func NewServerHTTP(userHandler *handler.UserHandler,adminHandler *handler.AdminHandler)*ServerHTTP{
 	engine:=gin.New()
 
 	engine.Use(gin.Logger())
@@ -19,6 +19,9 @@ func NewServerHTTP(userHandler *handler.UserHandler)*ServerHTTP{
 	userRoutes:=engine.Group("/")
 	userRoutes.POST("signup",userHandler.SignUp)
 	userRoutes.POST("login",userHandler.Login)
+
+	adminRoutes:=engine.Group("/admin")
+	adminRoutes.POST("/login",adminHandler.Login)
 
 	return &ServerHTTP{engine: engine}
 
