@@ -13,6 +13,8 @@ package di
 // 		api.NewServerHTTP,
 // 		client.NewUserClient,
 // 	handler.NewAdminHandler,
-// client.NewAdminClient)
+// client.NewAdminClient,
+// handler.NewProductHandler,
+// client.NewProductClient)
 // 	return &api.ServerHTTP{}, nil
 // }

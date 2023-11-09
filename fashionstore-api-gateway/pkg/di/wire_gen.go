@@ -20,6 +20,8 @@ func InitializeAPI(c config.Config) (*api.ServerHTTP, error) {
 	userHandler := handler.NewUserHandler(userClient)
 	adminClient := client.NewAdminClient(c)
 	adminHandler := handler.NewAdminHandler(adminClient)
-	serverHTTP := api.NewServerHTTP(userHandler, adminHandler)
+	productClient := client.NewProductClient(c)
+	productHandler := handler.NewProductHandler(productClient)
+	serverHTTP := api.NewServerHTTP(userHandler, adminHandler, productHandler)
 	return serverHTTP, nil
 }

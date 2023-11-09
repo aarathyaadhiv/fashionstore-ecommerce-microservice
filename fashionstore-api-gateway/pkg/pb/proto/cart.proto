@@ -1,0 +1,40 @@
+syntax="proto3";
+
+package pb;
+
+option go_package="./pkg/pb";
+
+service CartService{
+   rpc AddToCart (AddToCartRequest) returns (AddToCartResponse){}
+   rpc ShowCart (ShowCartRequest) returns (ShowCartResponse) {}
+}
+
+
+
+message CartProduct{
+    uint64 id=1;
+    string name=2;
+    string description=3;
+    double amount=4;
+    uint32 quantity=5;
+    string status=6;
+}
+
+message ShowCartRequest{
+    uint64 cartId=1;
+    int32 page=2;
+    int32 count=3;
+}
+
+message ShowCartResponse{
+    repeated CartProduct product=1;
+}
+
+message AddToCartRequest{
+    uint64 cartId=1;
+    uint64 productId=2;
+}
+
+message AddToCartResponse{
+    string error=1;
+}

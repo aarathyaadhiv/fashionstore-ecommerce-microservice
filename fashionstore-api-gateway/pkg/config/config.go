@@ -7,6 +7,7 @@ type Config struct{
 	Port string `mapstructure:"PORT"`
 	UserSvcUrl string `mapstructure:"USER_SVC_URL"`
 	AdminSvcUrl string `mapstructure:"ADMIN_SVC_URL"`
+	ProductSvcUrl string `mapstructure:"PRODUCT_SVC_URL"`
 }
 
 func LoadConfig () (c Config,err error){
