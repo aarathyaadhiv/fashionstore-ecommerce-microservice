@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"errors"
-	"fmt"
+	
 	"golang.org/x/crypto/bcrypt"
 	"github.com/aarathyaadhiv/fashionstore-user-service/pkg/pb"
 	"github.com/aarathyaadhiv/fashionstore-user-service/pkg/helper"
@@ -58,9 +58,9 @@ func (c *UserService) Login(ctx context.Context,user *pb.LoginRequest) (*pb.Logi
 	if ok,_ := c.Repo.IsBlocked(user.Email); ok {
 		return nil, errors.New("user is blocked")
 	}
-	fmt.Println("user",user)
+	
 	userCompare, err := c.Repo.FindByEmail(user.Email)
-	fmt.Println("usercompare",userCompare)
+	
 	if err != nil {
 		return nil, errors.New("error in fetching userdata")
 	}
@@ -69,12 +69,12 @@ func (c *UserService) Login(ctx context.Context,user *pb.LoginRequest) (*pb.Logi
 	}
 
 	userDetails :=&pb.UserDetails{Id: userCompare.ID,Name: userCompare.Name,Email: userCompare.Email,Phno: userCompare.PhNo}
-	fmt.Println("userdetails:",userDetails)
+	
 	tokenString, err := helper.GenerateUserToken(userDetails)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("token",tokenString)
+	
 	return &pb.LoginResponse{Userdetails: userDetails, Token: tokenString}, nil
 
 }

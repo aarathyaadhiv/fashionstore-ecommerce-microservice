@@ -7,7 +7,8 @@ option go_package="./pkg/pb";
 service ProductService{
    rpc AddProduct(AddProductRequest) returns (AddProductResponse) {}
    rpc ListProducts(ListProductRequest) returns (ListProductResponse){}
-
+   rpc ProductDetails (ProductDetailsRequest) returns (ProductDetailsResponse) {}
+   rpc FetchProduct (FetchProductRequest) returns (FetchProductResponse) {}
 }
 
 
@@ -48,3 +49,24 @@ message ListProductResponse{
     repeated ProductDetail products=1;
 }
 
+message ProductDetailsRequest{
+    repeated uint64 id=1;
+}
+
+
+
+message ProductDetailsResponse{
+    repeated FetchProductResponse products=1; 
+}
+
+message FetchProductRequest{
+    uint64 id=1;
+}
+
+message FetchProductResponse{
+    uint64 id=1;
+    string name=2;
+    string description=3;
+    uint32 quantity=4;
+    double sellingPrice=5;
+}

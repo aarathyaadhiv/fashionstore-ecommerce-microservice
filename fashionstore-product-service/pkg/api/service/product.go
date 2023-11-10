@@ -53,3 +53,19 @@ func (c *ProductService) ListProducts(ctx context.Context,show *pb.ListProductRe
 	return &pb.ListProductResponse{Products: updatedProductResponse}, nil
 
 }
+
+func (c *ProductService) ProductDetails(ctx context.Context,req *pb.ProductDetailsRequest)(*pb.ProductDetailsResponse,error){
+	response:=make([]*pb.FetchProductResponse,0)
+	for _,productId:=range req.Id{
+		product,err:=c.Repo.FetchProduct(productId)
+		if err!=nil{
+			return &pb.ProductDetailsResponse{},err
+		}
+		response = append(response, product)
+	}
+	return &pb.ProductDetailsResponse{Products: response},nil
+}
+
+func (c *ProductService) FetchProduct(ctx context.Context,req *pb.FetchProductRequest)(*pb.FetchProductResponse,error){
+	return c.Repo.FetchProduct(req.Id)
+}

@@ -15,6 +15,8 @@ package di
 // 	handler.NewAdminHandler,
 // client.NewAdminClient,
 // handler.NewProductHandler,
-// client.NewProductClient)
+// client.NewProductClient,
+// client.NewCartClient,
+// handler.NewCartHandler)
 // 	return &api.ServerHTTP{}, nil
 // }

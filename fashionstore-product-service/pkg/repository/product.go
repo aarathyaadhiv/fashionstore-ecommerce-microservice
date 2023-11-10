@@ -65,3 +65,12 @@ func (c *ProductRepository) Quantity(id uint64) (uint32, error) {
 	}
 	return quantity, err
 }
+
+func (c *ProductRepository) FetchProduct(id uint64)(*pb.FetchProductResponse,error){
+	var product *pb.FetchProductResponse
+	err := c.DB.Raw(`SELECT id,name,description,quantity,selling_price FROM products WHERE id=?`, id).Scan(&product).Error
+	if err != nil {
+		return &pb.FetchProductResponse{}, err
+	}
+	return product, err
+}

@@ -1,7 +1,6 @@
 proto:
 	protoc --go-grpc_out=. ./pkg/pb/proto/*.proto
 
-	
 
 	
 server:

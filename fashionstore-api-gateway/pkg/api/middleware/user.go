@@ -15,7 +15,7 @@ import (
 )
 
 type CustomUserClaim struct {
-	ID    uint
+	ID    uint64
 	Email string
 	Role  string
 	jwt.StandardClaims

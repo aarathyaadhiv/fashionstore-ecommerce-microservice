@@ -12,7 +12,7 @@ type ServerHTTP struct{
 	engine *gin.Engine
 }
 
-func NewServerHTTP(userHandler *handler.UserHandler,adminHandler *handler.AdminHandler,productHandler *handler.ProductHandler)*ServerHTTP{
+func NewServerHTTP(userHandler *handler.UserHandler,adminHandler *handler.AdminHandler,productHandler *handler.ProductHandler,cartHandler *handler.CartHandler)*ServerHTTP{
 	engine:=gin.New()
 
 	engine.Use(gin.Logger())
@@ -28,6 +28,11 @@ func NewServerHTTP(userHandler *handler.UserHandler,adminHandler *handler.AdminH
 	productRoutes.GET("",productHandler.ListProducts)
 	productRoutes.Use(middleware.AdminAuthorizationMiddleware)
 	productRoutes.POST("",productHandler.AddProduct)
+
+	cartRoutes:=engine.Group("/cart")
+	cartRoutes.Use(middleware.UserAuthorizationMiddleware)
+	cartRoutes.POST("/:id",cartHandler.AddToCart)
+	cartRoutes.GET("",cartHandler.ShowProductInCart)
 	
 
 	return &ServerHTTP{engine: engine}

@@ -14,7 +14,7 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 type CustomAdminClaim struct {
-	ID    uint
+	ID    uint64
 	Email string
 	Role  string
 	jwt.StandardClaims
